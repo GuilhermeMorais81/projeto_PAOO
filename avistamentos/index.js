@@ -36,3 +36,8 @@ app.post('/avistamentos', (req, res) => {
         res.status(201).json(novoAvistamento);
     }
 })
+
+app.post('/eventos', async (req, res) => {
+    console.log(req.body.tipo);
+    res.status(200).json({ msg: "ok" });
+})
