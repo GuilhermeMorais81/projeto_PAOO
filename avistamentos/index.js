@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const app = express();
 app.use(express.json());
 
@@ -22,7 +23,7 @@ function campoEstaVazio(campo) {
     return campo === undefined || campo === "";
 }
 
-app.post('/avistamentos', (req, res) => {
+app.post('/avistamentos', async (req, res) => {
     if(campoEstaVazio(req.body.local) || campoEstaVazio(req.body.descricao)) 
         res.status(400).json({ erro: "local e descricao são obrigatórios" })
     else {
@@ -33,6 +34,7 @@ app.post('/avistamentos', (req, res) => {
         };
         avistamentos[contadorId] = novoAvistamento;
         contadorId++;
+        await axios.post('http://localhost:10000/eventos', { tipo:"AvistamentoCriado", dados:novoAvistamento });
         res.status(201).json(novoAvistamento);
     }
 })
