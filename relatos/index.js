@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const app = express();
 const {v4: uuidv4} = require('uuid')
 app.use(express.json());
@@ -26,6 +27,7 @@ app.post('/avistamentos/:id/relatos', async (req, res) => {
     const relatosDoAvistamento = relatosPorAvistamentoId[req.params.id] || [];
     relatosDoAvistamento.push(novoRelato);
     relatosPorAvistamentoId[req.params.id] = relatosDoAvistamento;
+    await axios.post('http://localhost:10000/eventos', { tipo:"RelatoCriado", dados:novoRelato })
     res.status(201).json(relatosDoAvistamento);
 })
 
