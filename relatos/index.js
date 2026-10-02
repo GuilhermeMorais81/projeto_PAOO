@@ -27,3 +27,7 @@ app.post('/avistamentos/:id/relatos', async (req, res) => {
     relatosPorAvistamentoId[req.params.id] = relatosDoAvistamento;
     res.status(201).json(relatosDoAvistamento);
 })
+
+app.get('/avistamentos/:id/relatos', async (req, res) => {
+    res.json(relatosPorAvistamentoId[req.params.id] || []);
+})
