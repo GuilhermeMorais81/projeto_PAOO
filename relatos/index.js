@@ -20,7 +20,8 @@ app.post('/avistamentos/:id/relatos', async (req, res) => {
     const novoRelato = {
         id: uuidv4(),
         texto: req.body.texto,
-        confirmacoes: 0
+        confirmacoes: 0,
+        avistamentoId: req.params.id
     }
     const relatosDoAvistamento = relatosPorAvistamentoId[req.params.id] || [];
     relatosDoAvistamento.push(novoRelato);
