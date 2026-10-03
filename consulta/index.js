@@ -14,6 +14,12 @@ const funcoes = {
             baseConsulta[relato.avistamentoId].relatos || [];
         relatosDoAvistamento.push(relato);
         baseConsulta[relato.avistamentoId].relatos = relatosDoAvistamento;
+    },
+    RelatoConfirmado: (relato) => {
+        for(let itemRelato of baseConsulta[relato.avistamentoId].relatos) {
+            if(itemRelato.id === relato.id)
+                itemRelato.confirmacoes = relato.confirmacoes;
+        }
     }
 }
 
