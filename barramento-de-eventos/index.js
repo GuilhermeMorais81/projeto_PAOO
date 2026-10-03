@@ -29,5 +29,12 @@ app.post('/eventos', async (req, res) => {
         console.log('porta 4200 falhou');
     }
 
+    try {
+        await axios.post('http://localhost:4300/eventos', evento);
+    }
+    catch(error) {
+        console.log('porta 4300 falhou');
+    }
+
     res.status(200).json({ msg: "ok" });
 })
