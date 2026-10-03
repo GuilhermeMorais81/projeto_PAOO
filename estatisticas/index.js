@@ -7,7 +7,10 @@ const totais = {
     relatos: 0,
     confirmacoes: 0 
 }
-
 const locais = {}
 
 app.listen(port, console.log(`Estatisticas. Porta ${port}.`));
+
+app.get('/estatisticas', (req, res) => {
+    res.json({totais, locais});
+})
