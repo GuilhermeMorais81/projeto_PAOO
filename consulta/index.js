@@ -18,6 +18,10 @@ const funcoes = {
 
 app.listen(port, () => console.log(`Consulta. Porta ${port}.`));
 
-app.get('/avistamentos', async (req, res) => {
+app.get('/avistamentos', (req, res) => {
     res.json(baseConsulta);
+})
+
+app.post('/eventos', async (req, res) => {
+    funcoes[req.body.tipo](req.body.dados);
 })
