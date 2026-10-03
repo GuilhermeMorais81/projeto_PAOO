@@ -29,6 +29,13 @@ app.get('/avistamentos', (req, res) => {
     res.json(baseConsulta);
 })
 
+app.get('/avistamentos/:id', (req, res) => {
+    if(baseConsulta[req.params.id] === undefined)
+        res.status(400).json({ erro: "avistamento não encontrado" });
+    else
+        res.json(baseConsulta[req.params.id]);
+})
+
 app.post('/eventos', async (req, res) => {
     try {
         funcoes[req.body.tipo](req.body.dados);
