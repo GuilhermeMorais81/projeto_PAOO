@@ -81,7 +81,7 @@ app.post('/eventos', (req, res) => {
 });
 
 app.get('/estatisticas/destaque', (req, res) => {
-    if(locaisNome.length == 0) 
+    if(locaisNome.length === 0) 
         res.status(404).json({ erro: "sem dados" });
     else res.json(encontrarDestaque());
 })
