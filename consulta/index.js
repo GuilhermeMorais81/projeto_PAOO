@@ -37,11 +37,6 @@ app.get('/avistamentos/:id', (req, res) => {
 })
 
 app.post('/eventos', async (req, res) => {
-    try {
-        funcoes[req.body.tipo](req.body.dados);
-        res.status(200).json({ msg: "ok" });
-    }
-    catch(error) {
-        console.log(error);
-    }
+    funcoes[req.body.tipo](req.body.dados);
+    res.status(200).json({ msg: "ok" });
 })
