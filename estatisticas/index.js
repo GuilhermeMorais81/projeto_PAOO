@@ -8,6 +8,7 @@ const totais = {
     confirmacoes: 0 
 }
 const locais = {}
+const locaisNome = [];
 const locaisCadaAvistamento = {}
 
 function criarNovoLocal(avistamento) {
@@ -18,8 +19,34 @@ function criarNovoLocal(avistamento) {
             relatos: 0,
             confirmacoes: 0 
         }
+        locaisNome.push(avistamento.local);
     }
 }
+
+function pegarEngajamento(local) {
+    return local.relatos + local.confirmacoes;
+}
+
+function encontrarDestaque() {
+    let max = locais[locaisNome[0]];
+    for(let nome of locaisNome) {
+        if(pegarEngajamento(locais[nome]) > pegarEngajamento(max)) {
+            max = locais[nome];
+        }
+    }
+    return {
+        local: encontrarPrimeiroEmpatado(max), 
+        engajamento: pegarEngajamento(max)
+    };
+}
+
+function encontrarPrimeiroEmpatado(max) {
+    for(let nome of locaisNome) {
+        if(pegarEngajamento(locais[nome]) === pegarEngajamento(max)) 
+            return nome;
+    }
+}
+
 
 const funcoes = {
     AvistamentoCriado: (avistamento) => {
@@ -41,7 +68,7 @@ app.listen(port, console.log(`Estatisticas. Porta ${port}.`));
 
 app.get('/estatisticas', (req, res) => {
     res.json({totais, locais});
-})
+});
 
 app.post('/eventos', (req, res) => {
     try {
@@ -50,5 +77,11 @@ app.post('/eventos', (req, res) => {
     catch(error) {
         console.log("Evento de tipo desconhecido recebido");
     }
-    res.status(200);
+    res.status(200).end();
 });
+
+app.get('/estatisticas/destaque', (req, res) => {
+    if(locaisNome.length == 0) 
+        res.status(404).json({ erro: "sem dados" });
+    else res.json(encontrarDestaque());
+})
