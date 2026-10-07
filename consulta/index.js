@@ -11,9 +11,9 @@ const funcoes = {
     },
     RelatoCriado: (relato) => {
         const relatosDoAvistamento = 
-            baseConsulta[relato.avistamentoId].relatos || [];
+            baseConsulta[relato.avistamentoId]['relatos'] || [];
         relatosDoAvistamento.push(relato);
-        baseConsulta[relato.avistamentoId].relatos = relatosDoAvistamento;
+        baseConsulta[relato.avistamentoId]['relatos'] = relatosDoAvistamento;
     },
     RelatoConfirmado: (relato) => {
         for(let itemRelato of baseConsulta[relato.avistamentoId].relatos) {
