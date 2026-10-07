@@ -11,6 +11,21 @@ const locais = {}
 const locaisNome = [];
 const locaisCadaAvistamento = {}
 
+/* {
+    "totais": {
+        "avistamentos": 2,
+        "relatos": 4,
+        "confirmacoes": 0
+    },
+    "locais": {
+        "Ipiranga": {
+            "avistamentos": 2,
+            "relatos": 4,
+            "confirmacoes": 0
+        }
+    }
+} */
+
 function criarNovoLocal(avistamento) {
     locaisCadaAvistamento[avistamento.id] = avistamento.local;
     if(locais[avistamento.local] === undefined) {
